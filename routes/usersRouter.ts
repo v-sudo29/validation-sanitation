@@ -7,6 +7,7 @@ usersRouter.get('/', usersController.usersListGet)
 
 // User create routes
 usersRouter.get('/create', usersController.usersCreateGet)
+
 usersRouter.post(
   '/create',
   usersController.validateUser,
@@ -15,5 +16,11 @@ usersRouter.post(
 
 // User update routes
 usersRouter.get('/:id/update', usersController.usersUpdateGet)
+
+usersRouter.post(
+  '/:id/update',
+  usersController.validateUser,
+  usersController.usersUpdatePost
+)
 
 export default usersRouter

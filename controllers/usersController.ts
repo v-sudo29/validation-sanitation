@@ -58,6 +58,7 @@ const usersUpdateGet = asyncHandler(async (req, res) => {
 
 // Update an existing user
 const usersUpdatePost = asyncHandler(async (req, res) => {
+  const userId = req.params.id
   const errors = validationResult(req)
 
   if (!errors.isEmpty()) {
@@ -65,7 +66,7 @@ const usersUpdatePost = asyncHandler(async (req, res) => {
       errors: errors.array(),
     })
   } else {
-    usersStorage.updateUser(req.body.id, {
+    usersStorage.updateUser(userId, {
       firstName: req.body.firstName,
       lastName: req.body.lastName,
     })
@@ -80,4 +81,5 @@ export default {
   usersCreateGet,
   usersCreatePost,
   usersUpdateGet,
+  usersUpdatePost,
 }

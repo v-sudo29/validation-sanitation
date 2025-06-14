@@ -14,11 +14,11 @@
   </p>
   <p>Last name: <%= user.lastName %>
   </p>
-  <form action="/users/<%= user.id %>/update">
+  <form action="/users/<%= user.id %>/update" method="POST">
     <label for="firstName">First name</label>
-    <input type="text" placeholder='First name'>
+    <input type="text" name="firstName" placeholder='First name'>
     <label for="lastName">Last name</label>
-    <input type="text" placeholder='Last name'>
+    <input type="text" name="lastName" placeholder='Last name'>
     <button type="submit">Submit</button>
   </form>
 </body>
