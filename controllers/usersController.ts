@@ -28,13 +28,17 @@ const usersCreateGet = asyncHandler(async (req, res) => {
   res.render('createUser')
 })
 const usersCreatePost = asyncHandler(async (req, res) => {
-  const { firstName = null, lastName = null } = req.body
+  const errors = validationResult(req)
 
-  if (!firstName || !lastName) {
-    res.render('createUser', { error: 'Error!' })
-    throw new Error('Error, must enter first and last name!')
+  if (!errors.isEmpty()) {
+    res.status(400).render('createUser', {
+      errors: errors.array(),
+    })
   } else {
-    usersStorage.addUser({ firstName, lastName })
+    usersStorage.addUser({
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+    })
     res.redirect('/users')
   }
 })
