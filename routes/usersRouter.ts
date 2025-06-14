@@ -1,15 +1,19 @@
 import Route from 'express'
-import userController from '../controllers/usersController'
+import usersController from '../controllers/usersController'
 
 const usersRouter = Route()
+// Users list
+usersRouter.get('/', usersController.usersListGet)
 
-// User update routes
-usersRouter.get('/', userController.usersListGet)
-usersRouter.get('/create', userController.usersCreateGet)
+// User create routes
+usersRouter.get('/create', usersController.usersCreateGet)
 usersRouter.post(
   '/create',
-  userController.validateUser,
-  userController.usersCreatePost
+  usersController.validateUser,
+  usersController.usersCreatePost
 )
+
+// User update routes
+usersRouter.get('/:id/update', usersController.usersUpdateGet)
 
 export default usersRouter

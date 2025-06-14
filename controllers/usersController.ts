@@ -20,13 +20,18 @@ const validateUser = [
     .withMessage(`Last name ${lengthErr}`),
 ]
 
+// Get list of users
 const usersListGet = asyncHandler(async (req, res) => {
   const allUsers = usersStorage.getUsers()
   res.render('users', { users: allUsers })
 })
+
+// Get create user form page
 const usersCreateGet = asyncHandler(async (req, res) => {
   res.render('createUser')
 })
+
+// Create a new user
 const usersCreatePost = asyncHandler(async (req, res) => {
   const errors = validationResult(req)
 
@@ -43,9 +48,36 @@ const usersCreatePost = asyncHandler(async (req, res) => {
   }
 })
 
+// Get update user form page
+const usersUpdateGet = asyncHandler(async (req, res) => {
+  const userId = req.params.id
+  const user = usersStorage.getUser(userId)
+  console.log(user)
+  res.render('updateUser', { user })
+})
+
+// Update an existing user
+const usersUpdatePost = asyncHandler(async (req, res) => {
+  const errors = validationResult(req)
+
+  if (!errors.isEmpty()) {
+    res.status(400).render('updateUser', {
+      errors: errors.array(),
+    })
+  } else {
+    usersStorage.updateUser(req.body.id, {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName,
+    })
+
+    res.redirect('/users')
+  }
+})
+
 export default {
   validateUser,
   usersListGet,
   usersCreateGet,
   usersCreatePost,
+  usersUpdateGet,
 }
