@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create a user!</title>
+</head>
+
+<body>
+  <h1>Create a user</h1>
+  <%- include('partials/errors.ejs') %>
+    <form action="/users/create" method="POST">
+      <label for="firstName">First Name</label>
+      <input id="firstName" name="firstName" type="text" placeholder='First name' required>
+      <label id="lastName" for="lastName">Last Name</label>
+      <input name="lastName" type="text" placeholder='Last name' required>
+      <button type='submit'>Submit</button>
+    </form>
+    <a href="/">Back to home</a>
+    <a href="/users">Back to users list</a>
+</body>
+
+</html>
