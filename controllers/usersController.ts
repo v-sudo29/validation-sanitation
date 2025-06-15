@@ -75,6 +75,15 @@ const usersUpdatePost = asyncHandler(async (req, res) => {
   }
 })
 
+// Delete an existing user
+const usersUpdateDelete = asyncHandler(async (req, res) => {
+  const userId = req.params.id
+
+  usersStorage.deleteUser(userId)
+
+  res.redirect('/users')
+})
+
 export default {
   validateUser,
   usersListGet,
@@ -82,4 +91,5 @@ export default {
   usersCreatePost,
   usersUpdateGet,
   usersUpdatePost,
+  usersUpdateDelete,
 }

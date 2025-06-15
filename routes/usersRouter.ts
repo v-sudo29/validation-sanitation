@@ -23,4 +23,7 @@ usersRouter.post(
   usersController.usersUpdatePost
 )
 
+// User delete route
+usersRouter.post('/:id/delete', usersController.usersUpdateDelete)
+
 export default usersRouter
